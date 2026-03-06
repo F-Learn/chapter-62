@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 62 · Cerebrovascular Disorders</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #4f6579, #364a5c);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: #ecf2f7;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 40px rgba(30, 50, 80, 0.5);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3d7399, #20517a);
+            color: white;
+            padding: 20px 30px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+            border-bottom: 5px solid #aac6e5;
+            box-shadow: 0 8px 15px #113753;
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1::before {
+            content: "🧠";
+            font-size: 2.3rem;
+            filter: drop-shadow(0 0 4px #c0d9f5);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .counter {
+            background: #1f5580;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            min-width: 110px;
+            text-align: center;
+            backdrop-filter: blur(3px);
+            border: 2px solid #b8d4f5;
+            color: #f1f9ff;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: #d2e2f0;
+            flex-shrink: 0;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #4c89c2, #2d6191);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 12px #5798dc;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 30px;
+            background: #e0eaf5;
+        }
+
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            background: white;
+            border-radius: 32px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(40, 80, 120, 0.2);
+            border: 2px solid #b9d2f0;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .question-header {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            background: linear-gradient(145deg, #3e7db3, #275b89);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            border: 3px solid #b7d4fa;
+            box-shadow: 0 7px 0 #174264;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #17456b;
+            flex-grow: 1;
+            font-weight: 600;
+            padding-right: 15px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            padding: 20px 22px;
+            border: 3px solid #d4e4f5;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.15rem;
+            box-shadow: 0 5px 12px rgba(30, 70, 110, 0.08);
+        }
+
+        .option:hover {
+            background: #f0f7ff;
+            border-color: #4183bf;
+            transform: translateY(-3px);
+            box-shadow: 0 18px 25px rgba(50, 100, 160, 0.15);
+        }
+
+        .option-letter {
+            background: linear-gradient(145deg, #3b79b1, #295e8b);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+            border: 2px solid #c2dbfa;
+        }
+
+        .option.correct {
+            background: linear-gradient(145deg, #c6e6d4, #b2dec6);
+            border-color: #2b7a56;
+            color: #1b4f32;
+        }
+        .option.correct .option-letter {
+            background: #1f7a51;
+            border-color: #b7f0d4;
+        }
+
+        .option.incorrect {
+            background: linear-gradient(145deg, #fad7d2, #fecbc3);
+            border-color: #b14242;
+            color: #631e1e;
+        }
+        .option.incorrect .option-letter {
+            background: #b84545;
+            border-color: #f5b7b7;
+        }
+
+        .feedback-area {
+            flex-shrink: 0;
+        }
+
+        .feedback {
+            padding: 25px;
+            border-radius: 20px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            animation: slideIn 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .feedback.correct {
+            background: linear-gradient(145deg, #daf0da, #c8e6c8);
+            border: 3px solid #2e7d5a;
+            color: #1b4d2b;
+            display: flex;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(145deg, #ffdedb, #fecbc7);
+            border: 3px solid #bb3b3b;
+            color: #632020;
+            display: flex;
+        }
+
+        .feedback-icon {
+            font-size: 2rem;
+        }
+
+        .rationale {
+            background: linear-gradient(145deg, #e4eef9, #d2e3f5);
+            border: 3px solid #3a7aa8;
+            border-radius: 20px;
+            padding: 25px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        .rationale.show {
+            display: block;
+        }
+        .rationale h4 {
+            color: #1b6093;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        .rationale p {
+            color: #0b3f66;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 35px;
+            background: #d0e1f2;
+            border-top: 3px solid #adc8e7;
+            flex-shrink: 0;
+            height: 85px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 16px 42px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 6px 0 #1c4f78;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #3c7cb6, #255e8f);
+            color: white;
+            border: 2px solid #bfdaf5;
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #143e60, 0 8px 20px #4181c0;
+        }
+        .btn-secondary {
+            background: linear-gradient(145deg, #3b6892, #224c70);
+            color: white;
+            border: 2px solid #c3d9f2;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #133247, 0 8px 20px #3b6a94;
+        }
+        .btn-cancel {
+            background: linear-gradient(145deg, #c27f7f, #aa4a4a);
+            color: white;
+            display: none;
+            border: 2px solid #f3baba;
+        }
+        .btn-cancel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 0 #632d2d;
+        }
+        .btn-cancel.show {
+            display: flex;
+        }
+
+        .btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 4px 0 #1a4a73;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 700px) {
+            .question-text { font-size: 1.2rem; }
+            .option { font-size: 1rem; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <h1>Chapter 62: Cerebrovascular Disorders</h1>
+            <div class="subtitle">39 questions · stroke · TIA · aneurysm · rehabilitation</div>
+        </div>
+        <div class="counter" id="counter">1/39</div>
+    </div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="question-area">
+            <div class="question-header">
+                <div class="question-number" id="questionNumber">1</div>
+                <div class="question-text" id="question"></div>
+            </div>
+            
+            <div class="options-container" id="options"></div>
+        </div>
+        
+        <div class="feedback-area">
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>🧠 STROKE RATIONALE:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">⬅️ PREV</button>
+        <div class="nav-buttons">
+            <button class="btn btn-cancel" id="cancelBtn" onclick="cancelSelection()">✖️ CANCEL</button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">NEXT ➡️</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ----- Chapter 62 exact questions (39 items) -----
+    const questions = [
+        { //1
+            id: 1,
+            question: "A nurse is assisting a client who had a recent stroke with getting dressed for physical therapy. The client looks at each piece of clothing before putting it on the body. The client states, 'This is how I know what item I am holding.' What impairment is this client likely experiencing?",
+            options: [
+                "A. Homonymous hemianopsia",
+                "B. Receptive aphasia",
+                "C. Agnosia",
+                "D. Hemiplegia"
+            ],
+            correct: 2, // C
+            rationale: "Agnosia: inability to recognize objects through senses. (PTS:1 REF:p.2033)"
+        },
+        { //2
+            id: 2,
+            question: "A client with a left hemispheric stroke is having difficulty with their normal speech patterns. The nurse is not sure whether the client has expressive aphasia or apraxia. Which statement would most likely be reflective of apraxia?",
+            options: [
+                "A. The nurse gives direction to get out of bed but the client does not understand.",
+                "B. The client points and gestures to an object needed on the overhead table.",
+                "C. The client starts by saying 'good morning' but finishes with saying 'good day' to the nurse.",
+                "D. The client sits up and turns to one side to see the object and states what is needed."
+            ],
+            correct: 2, // C
+            rationale: "Apraxia: verbal substitutions, unable to perform learned actions. (PTS:1 REF:p.2033)"
+        },
+        { //3
+            id: 3,
+            question: "A client with a recent stroke history is admitted to a rehabilitation unit and placed on high fall risk precautions. The client is impulsive, easily distracted, frequently forgets his/her cane when walking, and the location of his/her room. What stroke conditions do these signs best indicate?",
+            options: [
+                "A. Ischemic stroke",
+                "B. Right hemispheric stroke",
+                "C. Hemorrhagic stroke",
+                "D. Left hemispheric stroke"
+            ],
+            correct: 1, // B
+            rationale: "Right hemispheric: impulsive, distracted, spatial/perceptual deficits. (PTS:1 REF:p.2035)"
+        },
+        { //4
+            id: 4,
+            question: "A client diagnosed with transient ischemic attacks (TIAs) is scheduled for a carotid endarterectomy. The nurse explains that this procedure will be done for which purpose?",
+            options: [
+                "A. To decrease cerebral edema",
+                "B. To prevent seizure activity that is common following a TIA",
+                "C. To remove atherosclerotic plaques blocking cerebral flow",
+                "D. To determine the cause of the TIA"
+            ],
+            correct: 2, // C
+            rationale: "Carotid endarterectomy removes plaque to prevent stroke. (PTS:1 REF:p.2040)"
+        },
+        { //5
+            id: 5,
+            question: "The nurse is discharging home a client who had a stroke. The client has a flaccid right arm and leg and is experiencing urinary incontinence. The nurse makes a referral to a home health nurse because of an awareness of what common client response to a change in body image?",
+            options: [
+                "A. Confusion",
+                "B. Uncertainty",
+                "C. Depression",
+                "D. Disassociation"
+            ],
+            correct: 2, // C
+            rationale: "Depression common after stroke due to loss of independence. (PTS:1 REF:p.2046)"
+        },
+        { //6
+            id: 6,
+            question: "The nurse is caring for a client who had a hemorrhagic stroke. What assessment finding constitutes an early sign of deterioration?",
+            options: [
+                "A. Generalized pain",
+                "B. Alteration in level of consciousness (LOC)",
+                "C. Tonic-clonic seizures",
+                "D. Shortness of breath"
+            ],
+            correct: 1, // B
+            rationale: "Altered LOC is earliest sign of deterioration after hemorrhagic stroke. (PTS:1 REF:p.2051)"
+        },
+        { //7
+            id: 7,
+            question: "A client with an ischemic stroke has been brought to the emergency room. The health care provider institutes measures to restore cerebral blood flow. What area of the brain would most likely benefit from this immediate intervention?",
+            options: [
+                "A. Cerebral cortex",
+                "B. Temporal lobe",
+                "C. Central sulcus",
+                "D. Penumbra region"
+            ],
+            correct: 3, // D
+            rationale: "Penumbra region is ischemic but salvageable with timely intervention. (PTS:1 REF:p.2033)"
+        },
+        { //8
+            id: 8,
+            question: "A rapid response and stroke alert/code has been called for a client with deep vein thrombosis (DVT) of the left leg being treated with intravenous heparin. The client's international normalized ratio (INR) is 2.1 and vital signs are: Temperature 100.1°F (37.8°C), heart rate 102, blood pressure 190/100, respirations 14, and saturation 89% on room air. What are priority interventions for a client who is currently on anticoagulant therapy and having an ischemic stroke?",
+            options: [
+                "A. Immediate intubation and urinary catheter placement",
+                "B. Supplemental oxygen and monitoring blood glucose levels",
+                "C. Antipyretics in order to keep the client in a state of hypothermia",
+                "D. Antihypertensive medications and vital signs every two hours"
+            ],
+            correct: 1, // B
+            rationale: "Oxygen if SpO2<95%, monitor glucose; BP management controversial. (PTS:1 REF:p.2039)"
+        },
+        { //9
+            id: 9,
+            question: "A client with a cerebral aneurysm exhibits signs and symptoms of an increase in intracranial pressure (ICP). What nursing intervention would be most appropriate for this client?",
+            options: [
+                "A. Passive range-of-motion exercises to prevent contractures",
+                "B. Supine positioning",
+                "C. Early initiation of physical therapy",
+                "D. Absolute bed rest in a quiet, non stimulating environment"
+            ],
+            correct: 3, // D
+            rationale: "Bed rest, quiet environment to avoid increased BP/ICP. (PTS:1 REF:p.2051)"
+        },
+        { //10
+            id: 10,
+            question: "A client recovering from a stroke has severe shoulder pain from subluxation of the shoulder. To prevent further injury and pain, the nurse caring for this client is aware of what principle of care?",
+            options: [
+                "A. The client should be fitted with a cast because use of a sling should be avoided due to adduction of the affected shoulder.",
+                "B. Elevation of the arm and hand can lead to further complications associated with edema.",
+                "C. Passively exercising the affected extremity is avoided in order to minimize pain.",
+                "D. The client should be taught to interlace fingers, place palms together, and slowly bring scapulae forward to avoid excessive force to shoulder."
+            ],
+            correct: 3, // D
+            rationale: "Teach client proper movement/positioning to protect shoulder. (PTS:1 REF:p.2043)"
+        },
+        { //11
+            id: 11,
+            question: "The client has been diagnosed with aphasia after suffering a stroke. What can the nurse do to best make the client's atmosphere more conducive to communication?",
+            options: [
+                "A. Provide a board of commonly used needs and phrases.",
+                "B. Have the client speak to loved ones on the phone daily.",
+                "C. Help the client complete his or her sentences as needed.",
+                "D. Speak in a loud and deliberate voice to the client."
+            ],
+            correct: 0, // A
+            rationale: "Communication board reduces frustration; avoid completing sentences. (PTS:1 REF:p.2045)"
+        },
+        { //12
+            id: 12,
+            question: "The nurse is assessing a client with a suspected stroke. What assessment finding is most suggestive of a stroke?",
+            options: [
+                "A. Facial droop",
+                "B. Dysrhythmias",
+                "C. Periorbital edema",
+                "D. Projectile vomiting"
+            ],
+            correct: 0, // A
+            rationale: "Facial droop classic sign of stroke. (PTS:1 REF:p.2051)"
+        },
+        { //13
+            id: 13,
+            question: "The nurse is caring for a client diagnosed with an ischemic stroke and knows that effective positioning of the client is important. Which of the following should be integrated into the client's plan of care?",
+            options: [
+                "A. The client's hip joint should be maintained in a flexed position.",
+                "B. The client should be in a supine position unless ambulating.",
+                "C. The client should be placed in a prone position for 15 to 30 minutes several times a day.",
+                "D. The client should be placed in a Trendelenburg position two to three times daily to promote cerebral perfusion."
+            ],
+            correct: 2, // C
+            rationale: "Prone positioning helps hip extension, prevents contractures. (PTS:1 REF:p.2042)"
+        },
+        { //14
+            id: 14,
+            question: "The nurse is educating a group of students about complications of an aneurysm. Which is a complication of aneurysm?",
+            options: [
+                "A. Seizure",
+                "B. Hypernatremia",
+                "C. Airway collapse",
+                "D. Pneumothorax"
+            ],
+            correct: 0, // A
+            rationale: "Seizures can occur due to increased ICP. (PTS:1 REF:p.2050)"
+        },
+        { //15
+            id: 15,
+            question: "A nurse is caring for a client diagnosed with a hemorrhagic stroke. When creating this client's plan of care, what goal should be prioritized?",
+            options: [
+                "A. Prevent complications of immobility.",
+                "B. Maintain and improve cerebral tissue perfusion.",
+                "C. Relieve anxiety and pain.",
+                "D. Relieve sensory deprivation."
+            ],
+            correct: 1, // B
+            rationale: "Priority: maintain cerebral perfusion. (PTS:1 REF:p.2051)"
+        },
+        { //16
+            id: 16,
+            question: "The nurse is preparing health education for a client who is being discharged after hospitalization for a hemorrhagic stroke. What content should the nurse include in this education?",
+            options: [
+                "A. Mild, intermittent seizures can be expected.",
+                "B. Take ibuprofen for a serious headache.",
+                "C. Take antihypertensive medication as prescribed.",
+                "D. Drowsiness is normal for the first week after discharge."
+            ],
+            correct: 2, // C
+            rationale: "Hypertension is major risk factor; antihypertensives essential. (PTS:1 REF:p.2051)"
+        },
+        { //17
+            id: 17,
+            question: "A client diagnosed with a cerebral aneurysm reports a severe headache to the nurse. What action is a priority for the nurse?",
+            options: [
+                "A. Sit with the client for a few minutes.",
+                "B. Administer an analgesic.",
+                "C. Inform the nurse manager.",
+                "D. Call the health care provider immediately."
+            ],
+            correct: 3, // D
+            rationale: "Severe headache may indicate aneurysm leak; notify provider immediately. (PTS:1 REF:p.2049)"
+        },
+        { //18
+            id: 18,
+            question: "A client is brought by ambulance to the ED after suffering what the family thinks is a stroke. The nurse caring for this client is aware that an absolute contraindication for thrombolytic therapy is what?",
+            options: [
+                "A. Evidence of hemorrhagic stroke",
+                "B. Blood pressure of 180/110 mm Hg",
+                "C. Evidence of stroke evolution",
+                "D. Previous thrombolytic therapy within the past 12 months"
+            ],
+            correct: 0, // A
+            rationale: "Hemorrhagic stroke is absolute contraindication for thrombolytics. (PTS:1 REF:p.2037)"
+        },
+        { //19
+            id: 19,
+            question: "When caring for a client who has had a stroke, a priority is reduction of ICP. What client position is most consistent with this goal?",
+            options: [
+                "A. Head turned slightly to the right side",
+                "B. Elevation of the head of the bed",
+                "C. Position changes every 15 minutes while awake",
+                "D. Extension of the neck"
+            ],
+            correct: 1, // B
+            rationale: "HOB elevation promotes venous drainage and lowers ICP. (PTS:1 REF:p.2039)"
+        },
+        { //20
+            id: 20,
+            question: "A client who suffered an ischemic stroke now has disturbed sensory perception. What principle should guide the nurse's care of this client?",
+            options: [
+                "A. The client should be approached on the side where visual perception is intact.",
+                "B. Attention to the affected side should be minimized in order to decrease anxiety.",
+                "C. The client should avoid turning in the direction of the defective visual field to minimize shoulder subluxation.",
+                "D. The client should be approached on the opposite side of where the visual perception is intact to promote recovery."
+            ],
+            correct: 0, // A
+            rationale: "Approach on intact side; teach to turn head to compensate. (PTS:1 REF:p.2043)"
+        },
+        { //21
+            id: 21,
+            question: "What should be included in the client's care plan when establishing an exercise program for a client affected by a stroke?",
+            options: [
+                "A. Schedule passive range of motion every other day.",
+                "B. Keep activity limited, as the client may be overstimulated.",
+                "C. Have the client perform active range-of-motion (ROM) exercises once a day.",
+                "D. Exercise the affected extremities passively four or five times a day."
+            ],
+            correct: 3, // D
+            rationale: "Passive ROM 4-5x/day to maintain joint mobility. (PTS:1 REF:p.2042)"
+        },
+        { //22
+            id: 22,
+            question: "A client is diagnosed with a right-sided stroke. The client is now experiencing hemianopsia. How might the nurse help the client manage the potential sensory and perceptional difficulties?",
+            options: [
+                "A. Keep the lighting in the client's room low.",
+                "B. Place the client's clock on the affected side.",
+                "C. Approach the client on the side where vision is impaired.",
+                "D. Place the client's extremities where the client can see them."
+            ],
+            correct: 3, // D
+            rationale: "Place extremities where client can see them; approach from intact side. (PTS:1 REF:p.2044)"
+        },
+        { //23
+            id: 23,
+            question: "A client recently had a stroke. Now the client has spasms in his/her hands, which is preventing a favorite hobby of knitting. The client is looking for a permanent solution to this problem. Which therapies would the nurse recommend?",
+            options: [
+                "A. Botulinum toxin type A and heat",
+                "B. Baclofen and stretching",
+                "C. Amitriptyline and splinting",
+                "D. Corticosteroids and acupuncture"
+            ],
+            correct: 1, // B
+            rationale: "Spasticity tx: baclofen, stretching. (PTS:1 REF:p.2042)"
+        },
+        { //24
+            id: 24,
+            question: "A client who has experienced an ischemic stroke has been admitted to the medical unit. The client's family is adamant that the client remain on bed rest to hasten recovery and to conserve energy. What principle of care should inform the nurse's response to the family?",
+            options: [
+                "A. The client should mobilize as soon as physically able.",
+                "B. To prevent contractures and muscle atrophy, bed rest should not exceed 4 weeks.",
+                "C. The client should remain on bed rest until the client expresses a desire to mobilize.",
+                "D. Lack of mobility will greatly increase the client's risk of stroke recurrence."
+            ],
+            correct: 0, // A
+            rationale: "Mobilize as soon as possible to prevent complications. (PTS:1 REF:p.2042)"
+        },
+        { //25
+            id: 25,
+            question: "A client has recently begun mobilizing during the recovery from an ischemic stroke. To protect the client's safety during mobilization, the nurse should perform what action?",
+            options: [
+                "A. Support the client's full body weight with a waist belt during ambulation.",
+                "B. Have a colleague follow the client closely with a wheelchair.",
+                "C. Avoid mobilizing the client in the early morning or late evening.",
+                "D. Ensure that the client's family members do not participate in mobilization."
+            ],
+            correct: 1, // B
+            rationale: "Have wheelchair nearby in case of fatigue/dizziness. (PTS:1 REF:p.2042)"
+        },
+        { //26
+            id: 26,
+            question: "A client diagnosed with a hemorrhagic stroke has been admitted to the neurologic ICU. The nurse knows that teaching for the client and family needs to begin as soon as the client is settled on the unit and will continue until the client is discharged. What will family education need to include?",
+            options: [
+                "A. How to differentiate between hemorrhagic and ischemic stroke",
+                "B. Risk factors for ischemic stroke",
+                "C. How to correctly modify the home environment",
+                "D. Techniques for adjusting the client's medication dosages at home"
+            ],
+            correct: 2, // C
+            rationale: "Home modification, assistive devices; medication adjustments not done by family. (PTS:1 REF:p.2046)"
+        },
+        { //27
+            id: 27,
+            question: "The nurse is reviewing the medication administration record of a client who possesses numerous risk factors for stroke. Which of the client's medications carries the greatest potential for reducing her risk of stroke?",
+            options: [
+                "A. Naproxen 250 PO b.i.d.",
+                "B. Calcium carbonate 1,000 mg PO b.i.d.",
+                "C. Aspirin 81 mg PO o.d.",
+                "D. Lorazepam 1 mg SL b.i.d. PRN"
+            ],
+            correct: 2, // C
+            rationale: "Low-dose aspirin may lower stroke risk. (PTS:1 REF:p.2035)"
+        },
+        { //28
+            id: 28,
+            question: "A nurse is educating a group of nursing students about signs and symptoms of a hemorrhagic stroke. Which is true of hemorrhagic stroke?",
+            options: [
+                "A. Occurs with vascular occlusion.",
+                "B. Is also known as thrombotic stroke.",
+                "C. Can be known as lacunar strokes.",
+                "D. Can occur in the subarachnoid space."
+            ],
+            correct: 3, // D
+            rationale: "Hemorrhagic stroke can occur in brain or subarachnoid space. (PTS:1 REF:p.2048)"
+        },
+        { //29
+            id: 29,
+            question: "The nurse is educating a group of nursing students about COVID-19 and risk for cerebrovascular disorders. The nurse educator notes that COVID-19 has shown to increase which condition?",
+            options: [
+                "A. Ischemic stroke",
+                "B. Decrease inflammation",
+                "C. Hemorrhagic stroke",
+                "D. Hypertension"
+            ],
+            correct: 0, // A
+            rationale: "COVID-19 clotting abnormalities increase ischemic stroke risk. (PTS:1 REF:p.2032)"
+        },
+        { //30
+            id: 30,
+            question: "The nurse is caring for a client who is known to be at risk for cardiogenic embolic strokes. What arrhythmia does this client most likely have?",
+            options: [
+                "A. Ventricular tachycardia",
+                "B. Atrial fibrillation",
+                "C. Supraventricular tachycardia",
+                "D. Bundle branch block"
+            ],
+            correct: 1, // B
+            rationale: "Atrial fibrillation increases risk of cardiogenic embolic stroke. (PTS:1 REF:p.2032)"
+        },
+        { //31
+            id: 31,
+            question: "The pathophysiology of an ischemic stroke involves the ischemic cascade, which includes the following steps. Place the steps in the order in which they occur. All options must be used. 1. Change in pH 2. Blood flow decreases 3. A switch to anaerobic respiration 4. Membrane pumps fail 5. Cells cease to function 6. Lactic acid is generated",
+            options: [
+                "A. 635241",
+                "B. 352416",
+                "C. 236145",
+                "D. 162534"
+            ],
+            correct: 2, // C (2,3,6,1,4,5)
+            rationale: "Ischemic cascade: blood flow decreases → switch to anaerobic → lactic acid → pH change → membrane pumps fail → cells cease. (PTS:1 REF:p.2032)"
+        },
+        { //32
+            id: 32,
+            question: "A nurse is taking care of a client with swallowing difficulties after a stroke. What are some interventions the nurse can accomplish to prevent the client from aspirating while eating? Select all that apply.",
+            options: [
+                "A. Encourage the client to increase his/her intake of water and juice.",
+                "B. Assist the client out of bed and into the chair for meals.",
+                "C. Instruct the client to tuck his/her chin towards their chest when swallowing.",
+                "D. Request a swallowing assessment by a speech therapist before the client's discharge",
+                "E. Recommend the insertion of a percutaneous endoscopic gastrostomy (PEG) tube."
+            ],
+            correct: [1,2], // B, C
+            rationale: "Upright position, chin tuck help prevent aspiration. (PTS:1 REF:p.2044)"
+        },
+        { //33
+            id: 33,
+            question: "Nursing care during the immediate recovery period from an ischemic stroke should normally prioritize which intervention?",
+            options: [
+                "A. Positioning the client to avoid intercranial pressure (ICP)",
+                "B. Maximizing partial pressure of carbon dioxide (PaCO2)",
+                "C. Administering hypertonic intravenous (IV) solution",
+                "D. Initiating early mobilization"
+            ],
+            correct: 0, // A
+            rationale: "Reduce ICP: positioning, osmotic diuretics. (PTS:1 REF:p.2039)"
+        },
+        { //34
+            id: 34,
+            question: "The nurse is caring for a client recovering from an ischemic stroke. What intervention(s) best addresses potential complications after an ischemic stroke? Select all that apply.",
+            options: [
+                "A. Providing frequent small meals rather than three larger meals",
+                "B. Teaching the client to perform deep breathing and coughing exercises.",
+                "C. Keeping a urinary catheter in place for the full duration of recovery.",
+                "D. Limiting intake of insoluble fiber, carbohydrates, and simple sugars.",
+                "E. Encourage the client to stay in bed and assist with turning and repositioning."
+            ],
+            correct: [0,1], // A, B
+            rationale: "Small meals, deep breathing prevent aspiration/pneumonia. (PTS:1 REF:p.2036)"
+        },
+        { //35
+            id: 35,
+            question: "During a client's recovery from stroke, the nurse should be aware of predictors of stroke outcome in order to help clients and families set realistic goals. What are the predictors of stroke outcome? Select all that apply.",
+            options: [
+                "A. National Institutes of Health Stroke Scale (NIHSS) score",
+                "B. Race",
+                "C. LOC at time of admission",
+                "D. Gender",
+                "E. Age"
+            ],
+            correct: [0,2,4], // A, C, E
+            rationale: "Predictors: age, NIHSS, LOC. Race/gender not significant. (PTS:1 REF:p.2041)"
+        },
+        { //36
+            id: 36,
+            question: "A nursing student is writing a care plan for a newly admitted client who has been diagnosed with a stroke. What major nursing diagnosis should most likely be included in the client's plan of care?",
+            options: [
+                "A. Adult failure to thrive",
+                "B. Post-trauma syndrome",
+                "C. Hyperthermia",
+                "D. Disturbed sensory perception"
+            ],
+            correct: 3, // D
+            rationale: "Stroke → high risk for disturbed sensory perception. (PTS:1 REF:p.2033)"
+        },
+        { //37
+            id: 37,
+            question: "When preparing to discharge a client home, the nurse has met with the family and warned them that the client may exhibit unexpected emotional responses. The nurse should teach the family that these responses are typically a result of what cause?",
+            options: [
+                "A. Frustration around changes in function and communication",
+                "B. Unmet physiologic needs",
+                "C. Changes in brain activity during sleep and wakefulness",
+                "D. Temporary changes in metabolism"
+            ],
+            correct: 0, // A
+            rationale: "Emotional problems often from frustration with ADLs/communication. (PTS:1 REF:p.2044)"
+        },
+        { //38
+            id: 38,
+            question: "A rehabilitation nurse caring for a client who has had a stroke is approached by the client's family and asked why the client has to do so much for self-care while obviously struggling to do so. What would be the nurse's best answer?",
+            options: [
+                "A. 'We are trying to help the client be as useful as possible.'",
+                "B. 'The focus on care in a rehabilitation facility is to help the client to resume as much self-care as possible.'",
+                "C. 'We aren't here to care for the client the way the hospital staff did; we are here to help the client get better and return home.'",
+                "D. 'Rehabilitation means helping clients do exactly what they did before their stroke.'"
+            ],
+            correct: 1, // B
+            rationale: "Rehab focus: resume as much self-care as possible. (PTS:1 REF:p.2047)"
+        },
+        { //39
+            id: 39,
+            question: "A client with a new diagnosis of ischemic stroke is deemed to be a candidate for treatment with tissue plasminogen activator (t-PA) and has been admitted to the ICU. In addition to closely monitoring the client's cardiac and neurologic status, the nurse monitors the client for signs of what complication?",
+            options: [
+                "A. Acute pain",
+                "B. Septicemia",
+                "C. Bleeding",
+                "D. Seizures"
+            ],
+            correct: 2, // C
+            rationale: "Bleeding most common side effect of t-PA. (PTS:1 REF:p.2037)"
+        }
+    ];
+
+    // ----- identical navigation/selection logic as template -----
+    let currentQuestion = 0;
+    let selectedOption = null;
+    let answers = Array(questions.length).fill(null);
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        if (!q) return;
+
+        const progress = ((currentQuestion + 1) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+        document.getElementById('counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+        document.getElementById('questionNumber').textContent = q.id;
+
+        document.getElementById('question').innerHTML = q.question;
+        loadOptions(q);
+
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        const stored = answers[currentQuestion];
+        document.getElementById('nextBtn').disabled = stored === null || stored === undefined;
+        document.getElementById('nextBtn').textContent = currentQuestion >= questions.length - 1 ? 'FINISH ➡️' : 'NEXT ➡️';
+    }
+
+    function loadOptions(q) {
+        const container = document.getElementById('options');
+        container.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const div = document.createElement('div');
+            div.className = 'option';
+            div.innerHTML = `<div class="option-letter">${String.fromCharCode(65 + idx)}</div><div>${opt}</div>`;
+            div.onclick = () => selectOption(idx);
+            container.appendChild(div);
+        });
+
+        const saved = answers[currentQuestion];
+        if (saved !== null && saved !== undefined) {
+            selectOption(saved, true);
+        }
+    }
+
+    function selectOption(index, fromMemory = false) {
+        const q = questions[currentQuestion];
+        if (!fromMemory && selectedOption !== null) return;
+
+        if (!fromMemory) {
+            selectedOption = index;
+            answers[currentQuestion] = index;
+        }
+
+        highlightSelected(index, q);
+        showFeedback(index, q);
+        document.getElementById('nextBtn').disabled = false;
+        document.getElementById('cancelBtn').classList.add('show');
+    }
+
+    function highlightSelected(index, q) {
+        const opts = document.querySelectorAll('.option');
+        opts.forEach((opt, i) => opt.classList.remove('correct', 'incorrect'));
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        if (Array.isArray(q.correct)) {
+            correctIndices.forEach(ci => opts[ci]?.classList.add('correct'));
+            if (!correctIndices.includes(index)) {
+                opts[index]?.classList.add('incorrect');
+            }
+        } else {
+            if (index === q.correct) {
+                opts[index].classList.add('correct');
+            } else {
+                opts[index].classList.add('incorrect');
+                opts[q.correct].classList.add('correct');
+            }
+        }
+    }
+
+    function showFeedback(index, q) {
+        const fb = document.getElementById('feedback');
+        const icon = document.getElementById('feedbackIcon');
+        const text = document.getElementById('feedbackText');
+        const rationaleDiv = document.getElementById('rationale');
+        const rationaleP = document.getElementById('rationaleText');
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        const isCorrect = correctIndices.includes(index);
+
+        if (isCorrect) {
+            fb.className = 'feedback correct';
+            icon.textContent = '✅';
+            text.textContent = 'CORRECT!';
+        } else {
+            fb.className = 'feedback incorrect';
+            icon.textContent = '❌';
+            const letters = correctIndices.map(c => String.fromCharCode(65 + c)).join(', ');
+            text.textContent = `INCORRECT. Correct answer(s): ${letters}`;
+        }
+
+        fb.style.display = 'flex';
+        rationaleP.innerHTML = q.rationale;
+        rationaleDiv.classList.add('show');
+    }
+
+    function cancelSelection() {
+        const q = questions[currentQuestion];
+        selectedOption = null;
+        answers[currentQuestion] = null;
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+        document.getElementById('nextBtn').disabled = true;
+    }
+
+    function nextCard() {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            selectedOption = null;
+            loadQuestion();
+        } else {
+            currentQuestion = 0;
+            loadQuestion();
+        }
+    }
+
+    function previousCard() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            const q = questions[currentQuestion];
+            selectedOption = answers[currentQuestion];
+            loadQuestion();
+        }
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key >= '1' && e.key <= '4') selectOption(parseInt(e.key)-1);
+        else if (e.key >= 'a' && e.key <= 'd') selectOption(e.key.charCodeAt(0)-97);
+        else if (e.key >= 'A' && e.key <= 'D') selectOption(e.key.charCodeAt(0)-65);
+        else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) previousCard();
+        else if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) nextCard();
+        else if (e.key === 'Escape' && document.getElementById('cancelBtn').classList.contains('show')) cancelSelection();
+    });
+
+    loadQuestion();
+</script>
+</body>
+</html>
